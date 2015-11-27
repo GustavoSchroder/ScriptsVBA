@@ -1,0 +1,39 @@
+Private Sub CommandButton1_Click()
+
+contaLinha = 2 'Esta variavel irá servir para pular de linha
+devolvidos = 0
+emCob = 0
+cobrados = 0
+valorEnviado = 0
+verificaCel = Cells(contaLinha, 16).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 1342
+
+valorEnviado = valorEnviado + Cells(contaLinha, 10).Value
+
+If verificaCel = "Quitado" Then
+cobrados = cobrados + Cells(contaLinha, 10).Value
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 16).Value  'verifica novo conteudo
+
+ElseIf verificaCel = "Negociação" Then
+emCob = emCob + Cells(contaLinha, 10).Value
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 16).Value  'verifica novo conteudo
+
+ElseIf verificaCel = "Devolvido" Then
+devolvidos = devolvidos + Cells(contaLinha, 10).Value
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 16).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 10).Value  'verifica novo conteudo
+
+End If
+
+Loop 'volta para o while
+MsgBox "Valor cobrado: " + CStr(cobrados) + vbCrLf + "Valor devolvido: " + CStr(devolvidos) + vbCrLf + "Valor em negociação " + CStr(emCob) + vbCrLf + "Valor enviado: " + CStr(valorEnviado) 'Mostra mensagem, qual linha é a vazia
+
+End Sub
