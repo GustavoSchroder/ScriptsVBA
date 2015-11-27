@@ -1,0 +1,36 @@
+Private Sub CommandButton1_Click()
+
+contaLinha = 2 'Esta variavel irá servir para pular de linha
+devolvidos = 0
+emCob = 0
+cobrados = 0
+verificaCel = Cells(contaLinha, 10).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 405
+If verificaCel = "DEVOLVIDO" Then 'verifica se a celula esta vazio
+devolvidos = devolvidos + 1
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 10).Value  'verifica novo conteudo
+
+ElseIf verificaCel = "EM COBRANCA" Then
+emCob = emCob + 1
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 10).Value  'verifica novo conteudo
+
+ElseIf verificaCel = "LIQUIDADO" Then
+cobrados = cobrados + 1
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 10).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 10).Value  'verifica novo conteudo
+
+End If
+
+Loop 'volta para o while
+MsgBox "Número de clientes devolvidos é " + CStr(devolvidos) + " e " + CStr(emCob) + " estão em cobrança e " + CStr(cobrados) + " de um total de 403 cliente"  'Mostra mensagem, qual linha é a vazia
+
+End Sub
+
