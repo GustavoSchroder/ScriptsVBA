@@ -1,0 +1,75 @@
+'Script para contagem e verificação
+
+Private Sub CommandButton1_Click()
+
+contaLinha = 3 'Esta variavel irá servir para pular de linha
+pend = 0
+verificaCel = Cells(contaLinha, 12).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 1610
+If verificaCel = -1 Then 'verifica se a celula esta vazio
+pend = pend + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+End If
+Loop 'volta para o while
+MsgBox "A quantidade funcionários que possuem restrições é: " + CStr(pend) 'Mostra mensagem, qual linha é a vazia
+
+End Sub
+
+Private Sub CommandButton2_Click()
+
+contaLinha = 3 'Esta variavel irá servir para pular de linha
+linhas = 0
+verificaCel = Cells(contaLinha, 12).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 1610
+If verificaCel = "" Then 'verifica se a celula esta vazio
+linhas = linhas + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+ElseIf verificaCel <> "" Then
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+End If
+Loop 'volta para o while
+MsgBox "A quantidade de linhas não verificadas é " + CStr(linhas) 'Mostra mensagem, qual linha é a vazia
+
+End Sub
+
+Private Sub CommandButton3_Click()
+contaLinha = 3 'Esta variavel irá servir para pular de linha
+noPend = 0
+verificaCel = Cells(contaLinha, 12).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 1610
+If verificaCel = -1 Then 'verifica se a celula esta vazio
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+ElseIf verificaCel = 1 Then
+noPend = noPend + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+End If
+
+Loop 'volta para o while
+MsgBox "Sem restrições: " + CStr(noPend) 'Mostra mensagem, qual linha é a vazia
+
+End Sub
+
