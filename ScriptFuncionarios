@@ -73,3 +73,29 @@ MsgBox "Sem restrições: " + CStr(noPend) 'Mostra mensagem, qual linha é a vaz
 
 End Sub
 
+rivate Sub CommandButton4_Click()
+
+contaLinha = 3 'Esta variavel irá servir para pular de linha
+Total = 1608
+afastados = 0
+verificaCel = Cells(contaLinha, 11).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < Total
+If verificaCel = "Afastado" Then 'verifica se a celula esta vazio
+afastados = afastados + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 11).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 11).Value  'verifica novo conteudo
+
+End If
+Loop 'volta para o while
+MsgBox "A quantidade funcionários afastados é: " + CStr(afastados) 'Mostra mensagem, qual linha é a vazia
+
+
+End Sub
+
+
