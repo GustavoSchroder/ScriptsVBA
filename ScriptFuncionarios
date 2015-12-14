@@ -98,4 +98,36 @@ MsgBox "A quantidade funcionários afastados é: " + CStr(afastados) 'Mostra men
 
 End Sub
 
+Private Sub CommandButton5_Click()
+contaLinha = 3 'Esta variavel irá servir para pular de linha
+pend = 0
+noPend = 0
+Dim mediaPend As Single
+Dim mediaNoPend As Single
+verificaCel = Cells(contaLinha, 12).Value 'Variável para gravar o conteúdo da célula
+       'Faça enquanto conteudo da celula diferente de  vazio
+       
+Do While contaLinha < 1610
+If verificaCel = -1 Then 'verifica se a celula esta vazio
+pend = pend + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+ElseIf verificaCel = 1 Then
+noPend = noPend + 1 'adiciona mais a soma
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+Else
+contaLinha = contaLinha + 1 'soma ela mesma, pula para próxima linha
+verificaCel = Cells(contaLinha, 12).Value  'verifica novo conteudo
+
+End If
+Loop 'volta para o while
+mediaPend = Math.Round((pend * 100) / 1610)
+mediaNoPend = Math.Round((noPend * 100) / 1610)
+
+MsgBox "A média de funcionários que possuem restrição é: " + CStr(mediaPend) + "% do total." + vbCrLf + "A média de funcionários que não possuem restrições é: " + CStr(mediaNoPend) + "% do total."  'Mostra mensagem, qual linha é a vazia
+
+End Sub
 
