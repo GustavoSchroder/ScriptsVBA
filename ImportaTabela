@@ -1,0 +1,331 @@
+Sub Importar()
+
+   Worksheets("Aguarde").Select
+   Application.ScreenUpdating = False ' esse codigo serve para atualizar a macro sem tremer a tela
+
+'limpeza Base
+
+    Sheets("Base").Select
+    Range("A2:C105820").Select
+    Selection.ClearContents
+    Range("B5").Select
+    
+
+    Sheets("Results by Participant").Select
+    Selection.AutoFilter
+    Range("J2:S105820").Select
+    Selection.ClearContents
+    Range("J2").Select
+
+
+    Sheets("Results by Participant").Select
+    Range("A1048576").Select
+    Selection.End(xlUp).Select
+    j = Replace(Replace(ActiveCell.Address, "A", ""), "$", "") + 5
+    
+
+
+'formulas para preencher toda base
+
+    Range("J2").Select
+    ActiveCell.FormulaR1C1 = "=RC[-6]*1"
+    Range("K2").Select
+    ActiveCell.FormulaR1C1 = "=IF(LEFT(RC[-8],8)=""PERGUNTA"","""",IFERROR(IFERROR(MID(LEFT(RC[-8],FIND("":"",RC[-8])),1,100),MID(LEFT(RC[-8],FIND(""?"",RC[-8])),1,100)),""""))"
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = "=IF(RC[-11]="""","""",(RC[-11]*1))"
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-1]&LEFT(LEFT(RC[-8],6),FIND(""."",LEFT(RC[-8],6))-1)*1,"""")"
+    Range("N2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-2]&LEFT(MID(RC[-9],7,5),FIND(""."",MID(RC[-9],7,5))-1)*1,"""")"
+    Range("O2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-3]&LEFT(MID(RC[-10],13,5),FIND(""."",MID(RC[-10],13,5))-1)*1,"""")"
+    Range("P2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-4]&MID(RC[-11],19,1)*1,"""")"
+    Range("Q2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-5]&MID(RC[-12],25,1)*1,"""")"
+    Range("R2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-6]&MID(RC[-13],31,1)*1,"""")"
+    Range("S2").Select
+    ActiveCell.FormulaR1C1 = "=IFERROR(RC[-7]&MID(RC[-14],37,1)*1,"""")"
+
+
+
+    Range("J2:S2").Select
+    Selection.AutoFill Destination:=Range("J2:S" & j), Type:=xlFillDefault
+    Range("J2:S" & j).Select
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    
+    
+    Sheets("Results by Participant").Select
+    Range("A1:S65000").Select
+    Selection.AutoFilter
+    
+    
+' Importar Base 1
+    
+    Sheets("Base").Select
+    Range("A1048576").Select
+    Selection.End(xlUp).Select
+    b = Replace(Replace(ActiveCell.Address, "A", ""), "$", "") + 1
+
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=13, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("M" & i & ":M" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+         
+' Importar Base 2
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=14, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("N" & i & ":N" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+' Importar Base 3
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=15, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("O" & i & ":O" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+' Importar Base 4
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=16, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("P" & i & ":P" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+' Importar Base 5
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=17, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("Q" & i & ":Q" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+' Importar Base 6
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=18, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("R" & i & ":R" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+' Importar Base 7
+    
+    b = f + 1
+    
+    Sheets("Results by Participant").Select
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=11, Criteria1:="<>"
+    ActiveSheet.Range("$A$1:$S$65000").AutoFilter Field:=19, Criteria1:="<>"
+    
+    Range("J1").Select
+    Selection.End(xlDown).Select
+    i = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+    Sheets("Results by Participant").Select
+    Range("J1048576").Select
+    Selection.End(xlUp).Select
+    f = Replace(Replace(ActiveCell.Address, "J", ""), "$", "")
+
+
+    Range("J" & i & ":K" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("A" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+    Sheets("Results by Participant").Select
+    Range("S" & i & ":S" & f).Select
+    Selection.Copy
+    Sheets("Base").Select
+    Range("C" & b).Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+
+        
+' Atualiza tabela dinamica
+
+    Sheets("Filtro").Select
+    Range("A10").Select
+    ActiveSheet.PivotTables("Tabela dinâmica3").PivotCache.Refresh
+    
+    ActiveSheet.PivotTables("Tabela dinâmica3").PivotSelect "'Keypad No.'[All]", _
+    xlLabelOnly + xlFirstRow, True
+    Range("A2").Select
+    Range(Selection, Selection.End(xlToRight)).Select
+    Range(Selection, Selection.End(xlDown)).Select
+    ActiveWindow.SmallScroll Down:=3
+    Selection.Copy
+    Sheets("Tabela").Select
+    Range("A3").Select
+    ActiveSheet.Paste
+    Rows("3:3").Select
+    Selection.EntireRow.Hidden = True
+    
+    MsgBox "IMPORTAÇÃO COM SUCESSO!"
+
+   
+End Sub
